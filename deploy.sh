@@ -1,23 +1,24 @@
 #!/bin/bash
 
-# Get the version and commit hash from the user
-echo "Enter the version: "
-read version
-echo "Enter the commit hash: "
-read commit_hash
+set -e
 
-# Tag the image with the version and commit hash
-docker tag img:0.0.0 $version-$commit_hash
+echo "enter value to create a tag: "
+read v commit
 
-# Build the image
-docker build -t $version-$commit_hash .
-
-# Push the image to the repository
-docker push $version-$commit_hash
-
-# Check if the image was pushed successfully
-if [ $? -eq 0 ]; then
-  echo "The image was pushed successfully!"
-else
-  echo "There was an error pushing the image."
+if [ -z "$v" ] && [ -z "$commit" ]; then
+  echo "Error: Missing parameters, Try run again with the version did you want and the commit hash"
+  exit 1
 fi
+
+docker build -t img:${v} .
+if [ "$?" -eq 0 ]; then
+ docker tag img:${v} libbybinn1/img:0.1 
+ git tag ${v} ${commit}
+ git push origin main --tags
+else
+  echo "Build failed"
+fi
+
+
+
+
