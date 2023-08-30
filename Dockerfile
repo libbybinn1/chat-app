@@ -1,4 +1,5 @@
 # set base image (host OS)
+
 FROM python:3.8-slim AS reduce_docker_image
 ENV FLASK_ENV development
 # --- NETFREE CERT INTSALL ---
