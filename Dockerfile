@@ -31,5 +31,8 @@ WORKDIR /code
 
 COPY --from=reduce_docker_image /code /code
 
+
+HEALTHCHECK --interval=60s --timeout=60s \
+    CMD curl --fail http://localhost:3000 || exit 1  
 # command to run on container start
 CMD [ "python", "./chatApp.py" ]
