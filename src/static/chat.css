@@ -57,7 +57,7 @@ input[type="text"] {
     border-radius: 5px;
 }
 
-#sendBtn {
+#sendBtn,#clearbtn {
     background-color: #34dbac;
     color: #fff;
     border: none;
@@ -66,7 +66,11 @@ input[type="text"] {
     cursor: pointer;
     margin-left: -5px;
 }
-
+#clearbtn{
+    margin-left: 731px;
+    margin-top: 30px;
+    font-size: 20px;
+}
 #chatbox {
     background-color: #fff;
     max-height: 300px;
@@ -82,7 +86,8 @@ input[type="text"] {
     height: 324px
 }
 
-a {
+
+a{
     display: block;
     text-align: center;
     color: white;

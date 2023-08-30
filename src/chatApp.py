@@ -108,10 +108,16 @@ def update_chat(id):
     
         with open(f'{my_path}/{id}.txt', 'a') as file:
             file.write(f'[{timestamp}] {username}: {message}\n')
-    
+
     with open(f'{my_path}/{id}.txt', 'r') as file:
         all_data = file.read()
     return all_data
+
+@app.route('/api/chat/<id>/clear', methods=['POST'])
+def clear_rooms(id):
+    if request.method == "POST":
+        with open(f'{my_path}/{id}.txt', 'w') as file:
+            file.write(f"")
 
 @app.route('/logout')
 def logout():
@@ -130,6 +136,7 @@ def decode_password(user_pass):
    pass_bytes = base64.b64decode(base64_bytes)
    user_pass = pass_bytes.decode('ascii')
    return user_pass
+  
 
 
 if __name__ == '__main__':
